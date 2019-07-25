@@ -40,5 +40,15 @@ public class Poll extends UserDateAudit {
 
     @NotNull
     private Instant expirationDateTime;
+    
+    public void addChoice(Choice choice) {
+        choices.add(choice);
+        choice.setPoll(this);
+    }
+    
+    public void removeChoice(Choice choice) {
+        choices.remove(choice);
+        choice.setPoll(null);
+    }
 
 }
