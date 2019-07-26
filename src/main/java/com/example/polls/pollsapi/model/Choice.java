@@ -8,7 +8,6 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "choices")
-@Data
 public class Choice {
 
     @Id
@@ -34,5 +33,29 @@ public class Choice {
 
     public Choice(String text) {
         this.text = text;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public Poll getPoll() {
+        return poll;
+    }
+
+    public void setPoll(Poll poll) {
+        this.poll = poll;
     }
 }
