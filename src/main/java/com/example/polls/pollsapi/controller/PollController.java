@@ -6,6 +6,7 @@
 package com.example.polls.pollsapi.controller;
 
 import com.example.polls.pollsapi.model.Poll;
+import com.example.polls.pollsapi.model.Vote;
 import com.example.polls.pollsapi.payload.*;
 import com.example.polls.pollsapi.security.CurrentUser;
 import com.example.polls.pollsapi.security.UserPrincipal;
@@ -60,8 +61,8 @@ public class PollController {
     @PostMapping("/{pollId}/votes")
     @PreAuthorize("hasRole('USER')")
     public PollResponse castVote(@CurrentUser UserPrincipal currentUser,
-                                 @PathVariable Long pollId,
-                                 @Valid @RequestBody VoteRequest voteRequest) {
+                         @PathVariable Long pollId,
+                         @Valid @RequestBody VoteRequest voteRequest) {
         return pollService.castVoteAndGetUpdatePoll(pollId, voteRequest, currentUser);
     }
     

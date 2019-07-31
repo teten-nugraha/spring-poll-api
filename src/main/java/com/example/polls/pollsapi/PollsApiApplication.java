@@ -1,6 +1,7 @@
 package com.example.polls.pollsapi;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
@@ -13,6 +14,7 @@ import java.util.TimeZone;
 		PollsApiApplication.class,
 		Jsr310JpaConverters.class
 })
+@EnableAutoConfiguration
 public class PollsApiApplication {
 
 	@PostConstruct

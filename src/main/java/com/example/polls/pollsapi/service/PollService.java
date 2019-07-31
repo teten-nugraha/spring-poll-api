@@ -14,6 +14,7 @@ import com.example.polls.pollsapi.payload.PollResponse;
 import com.example.polls.pollsapi.payload.VoteRequest;
 import com.example.polls.pollsapi.repository.PollRepository;
 import com.example.polls.pollsapi.repository.VoteRepository;
+import com.example.polls.pollsapi.util.ModelMapper;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.*;
 
@@ -87,7 +88,7 @@ public class PollService {
 
     private void validatePageNumberAndSize(int page, int size) {
         if(page < 0) {
-            throw new BadRequestException("Page number cannot be less than zero.")
+            throw new BadRequestException("Page number cannot be less than zero.");
         }
         if(size > AppConstants.MAX_PAGE_SIZE) {
             throw new BadRequestException("Page size must not be greater than "+ AppConstants.MAX_PAGE_SIZE);
@@ -99,7 +100,7 @@ public class PollService {
                 .orElseThrow(() -> new ResourceNotFoundException("Poll", "id", pollId));
 
         if(poll.getExpirationDateTime().isBefore(Instant.now())) {
-            throw new BadRequestException(("Sorry! This Poll has already expired");
+            throw new BadRequestException("Sorry! This Poll has already expired");
         }
 
         User user = userRepository.getOne(currentUser.getId());
@@ -121,6 +122,7 @@ public class PollService {
             throw new BadRequestException("Sorry! You have already cast your vote in this poll");
         }
 
+        return ModelMapper.mapPollToPollResponse(vote.getChoice().getId());
 
     }
 }
