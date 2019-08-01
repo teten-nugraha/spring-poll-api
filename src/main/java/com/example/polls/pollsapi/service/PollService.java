@@ -22,6 +22,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.example.polls.pollsapi.repository.UserRepository;
 import com.example.polls.pollsapi.security.UserPrincipal;
@@ -122,7 +123,14 @@ public class PollService {
             throw new BadRequestException("Sorry! You have already cast your vote in this poll");
         }
 
-        return ModelMapper.mapPollToPollResponse(vote.getChoice().getId());
+        List<ChoiceVoteCount> votes = voteRepository.countByPollIdGroupByChoiceId(pollId);
+        Map<Long, Long> choiceVotesMap = votes.stream()
+                .collect(Collectors.toMap(ChoiceVoteCount::getChoiceId, ChoiceVoteCount::getVoteCount));
+
+        User creator = userRepository.findById(poll.getCreatedBy())
+                .orElseThrow(() -> new ResourceNotFoundException("User", "id", poll.getCreatedBy()));
+
+        return ModelMapper.mapPollToPollResponse(poll,choiceVotesMap, creator, vote.getChoice().getId());
 
     }
 }
