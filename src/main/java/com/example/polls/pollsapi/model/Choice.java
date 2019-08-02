@@ -58,4 +58,12 @@ public class Choice {
     public void setPoll(Poll poll) {
         this.poll = poll;
     }
+
+    @Override
+    public String toString() {
+        return "Choice{" +
+                "id=" + id +
+                ", text='" + text + '\'' +
+                '}';
+    }
 }

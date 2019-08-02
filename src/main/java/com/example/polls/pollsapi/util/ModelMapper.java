@@ -49,7 +49,14 @@ public class ModelMapper {
 
 
         long totalVotes = pollResponse.getChoices().stream().mapToLong(ChoiceResponse::getVoteCount).sum();
+
         pollResponse.setTotalVotes(totalVotes);
+
+//        pollResponse
+//                .getChoices()
+//                .stream()
+//                .mapToLong(ChoiceResponse::getVoteCount)
+//                .forEach(System.out::println);
 
         return pollResponse;
 
