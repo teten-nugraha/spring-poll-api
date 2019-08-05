@@ -7,14 +7,15 @@ public class PagedResponse<T> {
     private List<T> content;
     private int page;
     private int size;
-    private int totalElements;
+    private long totalElements;
     private int totalPages;
     private boolean last;
 
     public PagedResponse() {
+
     }
 
-    public PagedResponse(List<T> content, int page, int size, int totalElements, int totalPages, boolean last) {
+    public PagedResponse(List<T> content, int page, int size, long totalElements, int totalPages, boolean last) {
         this.content = content;
         this.page = page;
         this.size = size;
@@ -47,11 +48,11 @@ public class PagedResponse<T> {
         this.size = size;
     }
 
-    public int getTotalElements() {
+    public long getTotalElements() {
         return totalElements;
     }
 
-    public void setTotalElements(int totalElements) {
+    public void setTotalElements(long totalElements) {
         this.totalElements = totalElements;
     }
 
@@ -71,3 +72,4 @@ public class PagedResponse<T> {
         this.last = last;
     }
 }
+
